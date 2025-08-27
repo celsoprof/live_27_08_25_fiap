@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -64,13 +65,113 @@ fun ListaGastosScreen(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-            text = "Suas despesas",
-            fontSize = 22.sp,
-            color = Color.Yellow
-        )
-            Spacer(modifier = Modifier.height(0.dp))
-            Column() {
-
+                text = "Suas despesas",
+                fontSize = 22.sp,
+                color = Color.Yellow,
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Column(
+                modifier = Modifier
+                    .verticalScroll(scrollableState)
+                    .weight(1f)
+                    .fillMaxSize()
+            ) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    shape = RectangleShape,
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Column {
+                        Text(
+                            text = "Nome da despesa",
+                            color = Color.White,
+                            fontSize = 18.sp
+                        )
+                        Text(
+                            text = "R$ 100",
+                            color = Color.White
+                        )
+                    }
+                }
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(16.dp))
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    shape = RectangleShape,
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Column {
+                        Text(
+                            text = "Nome da despesa",
+                            color = Color.White,
+                            fontSize = 18.sp
+                        )
+                        Text(
+                            text = "R$ 100",
+                            color = Color.White
+                        )
+                    }
+                }
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(32.dp))
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    shape = RectangleShape,
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Column {
+                        Text(
+                            text = "Nome da despesa",
+                            color = Color.White,
+                            fontSize = 18.sp
+                        )
+                        Text(
+                            text = "R$ 100",
+                            color = Color.White
+                        )
+                    }
+                }
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(16.dp))
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    shape = RectangleShape,
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Column {
+                        Text(
+                            text = "Nome da despesa",
+                            color = Color.White,
+                            fontSize = 18.sp
+                        )
+                        Text(
+                            text = "R$ 100",
+                            color = Color.White
+                        )
+                    }
+                }
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(32.dp))
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -193,6 +294,7 @@ fun ListaGastosScreen(modifier: Modifier = Modifier) {
             }
             Column(
                 modifier = Modifier
+                    .padding(top = 16.dp)
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.End
             ) {
@@ -219,7 +321,8 @@ fun ListaGastosScreen(modifier: Modifier = Modifier) {
                 Button(
                     onClick = {},
                     modifier = Modifier
-                        .fillMaxWidth().height(48.dp),
+                        .fillMaxWidth()
+                        .height(48.dp),
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults
                         .buttonColors(
