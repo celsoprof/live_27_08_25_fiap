@@ -27,20 +27,43 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.fiap.gastos.R
+import br.com.fiap.gastos.model.Despesa
+import br.com.fiap.gastos.repository.DespesaRepository
 import br.com.fiap.gastos.ui.theme.GastosTheme
 
 @Composable
 fun CadastroScreen(modifier: Modifier = Modifier) {
+
+    var textGasto by remember {
+        mutableStateOf("")
+    }
+
+    var textDescricao by remember {
+        mutableStateOf("")
+    }
+
+    var textValor by remember {
+        mutableStateOf("")
+    }
+
+    val context = LocalContext.current
+    val despesaRepository = DespesaRepository(context)
+
     Box(
         modifier = Modifier
             .padding(top = 48.dp)
@@ -85,8 +108,10 @@ fun CadastroScreen(modifier: Modifier = Modifier) {
             }
             Spacer(modifier = Modifier.height(32.dp))
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = textGasto,
+                onValueChange = {
+                    textGasto = it
+                },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
                 colors = OutlinedTextFieldDefaults
@@ -109,8 +134,10 @@ fun CadastroScreen(modifier: Modifier = Modifier) {
             )
             Spacer(modifier = Modifier.height(8.dp))
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = textDescricao,
+                onValueChange = {
+                    textDescricao = it
+                },
                 modifier = Modifier.fillMaxWidth()
                     .height(150.dp),
                 shape = RoundedCornerShape(8.dp),
@@ -128,8 +155,10 @@ fun CadastroScreen(modifier: Modifier = Modifier) {
             )
             Spacer(modifier = Modifier.height(8.dp))
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = textValor,
+                onValueChange = {
+                    textValor = it
+                },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
                 colors = OutlinedTextFieldDefaults
@@ -152,7 +181,14 @@ fun CadastroScreen(modifier: Modifier = Modifier) {
             )
             Spacer(modifier = Modifier.height(32.dp))
             Button(
-                onClick = {},
+                onClick = {
+                    val despesa = Despesa(
+                        nomeDespesa = textGasto,
+                        descricao = textDescricao,
+                        valor = textValor.toDouble()
+                    )
+                    despesaRepository.gravar(despesa)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
