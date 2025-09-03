@@ -12,4 +12,8 @@ class DespesaRepository(context: Context) {
         return db.getDespesaDao().gravar(despesa)
     }
 
+    fun listarDespesas(): List<Despesa>{
+        return db.getDespesaDao().listarTodasAsDespesas()
+    }
+
 }

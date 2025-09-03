@@ -1,22 +1,19 @@
 package br.com.fiap.gastos.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
@@ -41,13 +38,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.fiap.gastos.R
 import br.com.fiap.gastos.model.Despesa
 import br.com.fiap.gastos.repository.DespesaRepository
 import br.com.fiap.gastos.ui.theme.GastosTheme
 
 @Composable
-fun CadastroScreen(modifier: Modifier = Modifier) {
+fun CadastroScreen(navegacao: NavHostController) {
 
     var textGasto by remember {
         mutableStateOf("")
@@ -138,7 +136,8 @@ fun CadastroScreen(modifier: Modifier = Modifier) {
                 onValueChange = {
                     textDescricao = it
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(150.dp),
                 shape = RoundedCornerShape(8.dp),
                 colors = OutlinedTextFieldDefaults
@@ -188,6 +187,8 @@ fun CadastroScreen(modifier: Modifier = Modifier) {
                         valor = textValor.toDouble()
                     )
                     despesaRepository.gravar(despesa)
+                    Toast.makeText(context, "Despesa $textGasto incluída com sucesso!", Toast.LENGTH_SHORT).show()
+                    navegacao.navigate("lista")
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -211,6 +212,6 @@ fun CadastroScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun CadastroScreenPreview() {
     GastosTheme {
-        CadastroScreen()
+        //CadastroScreen(navegacao)
     }
 }

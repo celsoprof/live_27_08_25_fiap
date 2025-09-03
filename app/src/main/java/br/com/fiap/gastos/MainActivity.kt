@@ -4,14 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import br.com.fiap.gastos.model.Despesa
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import br.com.fiap.gastos.screens.CadastroScreen
 import br.com.fiap.gastos.screens.ListaGastosScreen
 import br.com.fiap.gastos.ui.theme.GastosTheme
@@ -22,8 +17,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GastosTheme {
-                //ListaGastosScreen()
-                CadastroScreen()
+
+                val navegacao = rememberNavController()
+                NavHost(
+                    navController = navegacao,
+                    startDestination = "lista"
+                ){
+                    composable(route = "lista") { ListaGastosScreen(navegacao) }
+                    composable(route = "cadastro") { CadastroScreen(navegacao) }
+                }
             }
         }
     }

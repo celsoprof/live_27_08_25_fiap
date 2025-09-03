@@ -64,4 +64,7 @@ dependencies {
 //    // KAPT Kotlin Annotation Processor Tool @Entity
     kapt("androidx.room:room-compiler:2.7.2")
 
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:2.9.3")
+
 }
